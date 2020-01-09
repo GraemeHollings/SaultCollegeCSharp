@@ -1,0 +1,28 @@
+﻿<Window x:Class="Q5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Q5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:Test2DBDataSet x:Key="test2DBDataSet"/>
+        <CollectionViewSource x:Key="thoughtsDBViewSource" Source="{Binding ThoughtsDB, Source={StaticResource test2DBDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource thoughtsDBViewSource}">
+        <Label Content="Enter Your Password here." HorizontalAlignment="Left" Margin="43,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.113,-1.531" Height="30" Width="148"/>
+        <TextBox x:Name="Password" HorizontalAlignment="Left" Height="23" Margin="43,63,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="148"/>
+        <Label Content="What are your thoughts?&#xD;&#xA;" HorizontalAlignment="Left" Margin="330,28,0,0" VerticalAlignment="Top" Width="195"/>
+        <TextBox x:Name="Thoughts" HorizontalAlignment="Left" Height="123" Margin="330,63,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="428"/>
+        <DataGrid x:Name="thoughtsDBDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="23,113,512,144" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding password}" Header="password" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="thoughtsColumn" Binding="{Binding thoughts}" Header="thoughts" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Submit&#xD;&#xA;" HorizontalAlignment="Left" Margin="664,213,0,0" VerticalAlignment="Top" Width="75" Height="19" Click="Button_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="lab8A.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab8A"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:ProductDBDataSet x:Key="productDBDataSet"/>
+        <CollectionViewSource x:Key="productsViewSource" Source="{Binding products, Source={StaticResource productDBDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource productsViewSource}">
+        <DataGrid x:Name="productsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="productIDColumn" Binding="{Binding ProductID}" Header="Product ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="unitPriceColumn" Binding="{Binding UnitPrice}" Header="Unit Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Header="Product Name" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
